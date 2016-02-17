@@ -1,0 +1,19 @@
+﻿<div class="header">
+    <div class="tag">V1</div>
+    <div ng-if="!selectedShow">
+        <input class="header-input" type="text" ng-model="searchTerm" placeholder="Search for a show...">
+        <button class="material-button search" ng-click="controller.search(searchTerm)"></button>
+    </div>
+    <div ng-if="selectedShow">
+        <span>{{selectedShow.name}}</span>
+        <button class="material-button back" ng-click="controller.goBack()"><</button>
+    </div>
+</div>
+<div class="content">
+    <div ng-if="shows && !selectedShow">
+        <show ng-repeat="showResponse in shows" ng-click="controller.selectShow(showResponse)" show="showResponse.show"></show>
+    </div>
+    <div ng-if="selectedShow">
+        <character ng-repeat="castResponse in selectedShow.cast" character="castResponse.character"></character>
+    </div>
+</div>

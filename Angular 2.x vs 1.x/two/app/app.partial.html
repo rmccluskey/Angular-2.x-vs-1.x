@@ -1,0 +1,19 @@
+﻿<div class="header">
+    <div class="tag">V2</div>
+    <div *ngIf="!selectedShow">
+        <input class="header-input" type="text" [(ngModel)]="searchTerm" placeholder="Search for a show...">
+        <button class="material-button search" (click)="search(searchTerm)"></button>
+    </div>
+    <div *ngIf="selectedShow">
+        <span>{{selectedShow.name}}</span>
+        <button class="material-button back" (click)="goBack()"><</button>
+    </div>
+</div>
+<div class="content">
+    <div *ngIf="shows && !selectedShow">
+        <show *ngFor="#showResponse of shows" (click)="selectShow(showResponse)" [show]="showResponse.show"></show>
+    </div>
+    <div *ngIf="selectedShow">
+        <character *ngFor="#castResponse of selectedShow.cast" [character]="castResponse.character"></character>
+    </div>
+</div>

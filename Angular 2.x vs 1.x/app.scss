@@ -1,0 +1,181 @@
+﻿$headerHeight: 60px;
+$primaryColor: rgb(14,41,60);
+$secondaryColor: rgb(25,187,213);
+$shadow: 2px 2px 2px rgba(0,0,0,0.4);
+
+@mixin phone() {
+     @media only screen and (max-width: 600px) {
+		@content
+	}
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: Calibri !important;
+}
+
+.header {
+    position: relative;
+    height: $headerHeight;
+    background-color: $primaryColor;
+    color: white;
+    box-shadow: $shadow;
+    width: 100%;
+    text-align: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    z-index: 1;
+    line-height: $headerHeight;
+    font-size: 25px;
+
+    .tag {
+        position: absolute;
+        color: $secondaryColor;
+    }
+
+    @include phone() {
+        text-align: left;
+    }
+
+    .header-input {
+        font-size: 25px;
+        margin-top: 12px;
+        padding: 2px;
+        background: none;
+        border: none;
+        border-bottom: 2px solid $secondaryColor;
+        color: white;
+        outline: none;
+        text-align: center;
+
+        @include phone() {
+           text-align: left;
+           margin-left: 40px;
+        }
+    }
+
+    .material-button {
+        position: absolute;
+        top: 36px;
+        right: calc(50% - 250px);
+
+        @include phone() {
+           right: 10px;
+        }
+    }
+}
+
+.material-button {
+    height: 44px;
+    width: 44px;
+    border-radius: 22px;
+    z-index: 1;
+    box-shadow: $shadow;
+    background-color: $secondaryColor;
+    border: none;
+    outline: none;
+
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+
+    &.search {
+        background-size: 22px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url("./images/toolbar_find.png");
+    }
+}
+
+.content {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    height: calc(100% - #{$headerHeight});
+    padding: 10px;
+    background-color: #F1F1F1;
+    box-sizing: border-box;
+
+    @include phone() {
+        padding: 0;
+    }
+
+    .panel {
+        padding: 10px;
+        box-shadow: $shadow;
+        background-color: white;
+        margin: 10px;
+    }
+}
+
+.panel {
+    display: flex;
+    height: 295px;
+    position: relative;
+    overflow: hidden;
+
+    .image {
+        margin: auto;
+        flex: 0 0 210px;
+
+        @include phone() {
+            flex: 0 0 100px;
+            height: 140px;
+        }
+    }
+
+    .name {
+        font-size: 25px;
+        font-weight: bold;
+        color: $primaryColor;
+
+        @include phone() {
+            font-size: 18px;
+        }
+    }
+
+    .details {
+        flex: 1 1 auto;
+        padding: 0 10px;
+        position: relative;        
+
+        .summary {
+            padding-top: 10px;
+
+            @include phone() {
+                font-size: 13px;
+            }
+        }        
+    }
+
+    .rating {  
+        flex: 0 0 80px;          
+        font-size: 50px;
+        font-weight: bold;
+        color: $secondaryColor;
+        line-height: 295px;
+
+        @include phone() {
+            flex: 0 40px;
+            font-size: 30px;
+        }
+    }
+}
+
+.character {
+    &.panel {
+        @include phone() {
+            height: 150px;
+        }
+    }
+
+    .name {
+        flex: 1;
+        margin: auto;
+        padding-left: 10px;
+    }
+}
