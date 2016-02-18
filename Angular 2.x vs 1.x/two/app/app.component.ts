@@ -14,18 +14,27 @@ import * as Interfaces from './interfaces';
 export class AppComponent {
     public selectedShow: Interfaces.IShow;
     public shows: Array<Interfaces.IShowResponse>; 
+    public isLoading: boolean;
 
     constructor(private showService: ShowService) {
     }
 
     search(term) {
-        this.showService.search(term).then(shows => this.shows = shows);
+        this.isLoading = true;
+        this.showService.search(term).then((shows) => {
+            this.shows = shows;
+            this.isLoading = false;
+        });
     }  
 
     selectShow(showResponse: Interfaces.IShowResponse) {
         this.selectedShow = showResponse.show;
         if (!this.selectedShow.cast) {
-            this.showService.getCast(this.selectedShow.id).then(cast => this.selectedShow.cast = cast);
+            this.isLoading = true;
+            this.showService.getCast(this.selectedShow.id).then((cast) => {
+                this.selectedShow.cast = cast;
+                this.isLoading = false;
+            });
         }
     }
 

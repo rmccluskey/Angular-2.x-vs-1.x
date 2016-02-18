@@ -4,6 +4,7 @@ import {ShowService, ShowServiceName} from "./show.service";
 interface IAppScope {
     selectedShow: Interfaces.IShow;
     shows: Array<Interfaces.IShowResponse>;
+    isLoading: boolean;
 }
 
 export function AppDirective() {
@@ -24,13 +25,21 @@ class AppController {
     }
 
     search(term) {
-        this.showService.search(term).then(shows => this.$scope.shows = shows);
+        this.$scope.isLoading = true;
+        this.showService.search(term).then((shows) => {
+            this.$scope.shows = shows;
+            this.$scope.isLoading = false;
+        });
     }
 
     selectShow(showResponse: Interfaces.IShowResponse) {
         this.$scope.selectedShow = showResponse.show;
         if (!this.$scope.selectedShow.cast) {
-            this.showService.getCast(this.$scope.selectedShow.id).then(cast => this.$scope.selectedShow.cast = cast);
+            this.$scope.isLoading = true;
+            this.showService.getCast(this.$scope.selectedShow.id).then((cast) => {
+                this.$scope.selectedShow.cast = cast;
+                this.$scope.isLoading = false;
+            });
         }
     }
 

@@ -13,7 +13,10 @@
     <div *ngIf="shows && !selectedShow">
         <show *ngFor="#showResponse of shows" (click)="selectShow(showResponse)" [show]="showResponse.show"></show>
     </div>
-    <div *ngIf="selectedShow">
+    <div *ngIf="selectedShow && selectedShow.cast">
         <character *ngFor="#castResponse of selectedShow.cast" [character]="castResponse.character"></character>
+    </div>
+    <div class="loading" *ngIf="!isLoading">
+        Loading...
     </div>
 </div>

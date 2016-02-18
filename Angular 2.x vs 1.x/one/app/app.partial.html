@@ -13,7 +13,10 @@
     <div ng-if="shows && !selectedShow">
         <show ng-repeat="showResponse in shows" ng-click="controller.selectShow(showResponse)" show="showResponse.show"></show>
     </div>
-    <div ng-if="selectedShow">
+    <div ng-if="selectedShow && selectedShow.cast">
         <character ng-repeat="castResponse in selectedShow.cast" character="castResponse.character"></character>
+    </div>
+    <div class="loading" ng-if="isLoading">
+        Loading...
     </div>
 </div>
