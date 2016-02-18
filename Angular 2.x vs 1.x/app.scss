@@ -42,6 +42,12 @@ body {
         text-align: left;
     }
 
+    .show-name {
+        @include phone() {
+           margin-left: 40px;
+        }
+    }
+
     .header-input {
         font-size: 25px;
         margin-top: 12px;
